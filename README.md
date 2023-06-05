@@ -44,6 +44,10 @@ NoR (Number of Requests): [Enter the number of requests]
 4. Press Enter to execute the requests.
 5. The script will send the specified number of requests to the target website from the spoofed IP address using the provided User-Agent.
 
+## Demo
+
+![image](https://github.com/ottersek/UdyatSpoof/assets/121310374/2f3509cd-12c9-4586-8ee8-750fbdd19eaa)
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
