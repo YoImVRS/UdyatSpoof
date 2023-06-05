@@ -1,0 +1,32 @@
+{
+  "name": "udyatspoof",
+  "version": "1.0.0",
+  "description": "Script de Node.js que permite enviar solicitudes HTTP spoofeadas a través de una dirección IP y User-Agent personalizados. Al ejecutar el script, se mostrará un panel donde se te solicitará ingresar la URL del sitio web objetivo, la IP spoofeada, el User-Agent spoofeado y el número de solicitudes que deseas enviar. Utiliza la biblioteca Axios para realizar las solicitudes HTTP.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ottersek/udyatspoof.git"
+  },
+  "keywords": [
+    "spoofer",
+    "udyatspoofer",
+    "requestspoofer",
+    "agentspoofer",
+    "ipspoofing",
+    "ip-spoofing"
+  ],
+  "author": "ottersec",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ottersek/udyatspoof/issues"
+  },
+  "homepage": "https://github.com/ottersek/udyatspoof#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "colors": "^1.4.0",
+    "figlet": "^1.6.0"
+  }
+}
