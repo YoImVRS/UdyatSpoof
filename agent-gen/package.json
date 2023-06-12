@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "commander": "^10.0.1",
+    "fs": "^0.0.1-security",
+    "minimist": "^1.2.8"
+  }
+}
