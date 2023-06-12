@@ -4,6 +4,20 @@
 
 UdyatSpoof is a script that allows you to send requests from a spoofed IP address. Please note that the use of IP spoofing may have legal and ethical implications. Ensure you have the necessary permissions and use it responsibly.
 
+## Updates
+
+1. A new system for spoofed agents has been implemented.
+2. The Spoofed Agents options have been modified so that you can use 3 ways (Default: Agents from agents.udyat file | From File: with the option to select a file with several agent names and choose them randomly | Custom: write by hand the agent for all requests, having to write it only once).
+
+# To use the agent generator we have implemented just follow these simple steps:
+```js
+cd agent-gen
+npm i
+node agent-gen.js --name (first variable of the Agent, then they will be generated from there) --output (output file, ex: agents.udyat)
+```
+
+****
+
 ## Installation
 
 1. Clone the repository:
