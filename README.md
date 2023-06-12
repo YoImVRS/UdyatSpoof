@@ -8,7 +8,7 @@ UdyatSpoof is a script that allows you to send requests from a spoofed IP addres
 
 1. Clone the repository:
 ```shell
-git clone https://github.com/your-username/UdyatSpoof.git
+git clone https://github.com/ottersek/UdyatSpoof.git
 ```
 2. Navigate to the project directory:
 ```
