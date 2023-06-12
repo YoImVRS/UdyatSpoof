@@ -1,6 +1,7 @@
 const readline = require('readline');
 const colors = require('colors');
 const figlet = require('figlet');
+const fs = require('fs');
 
 process.stdout.write('\x1b]2;UdyatSpoof v1 - github.com/ottersek\x1b\x5c');
 process.stdout.write('\x1Bc');
@@ -17,21 +18,81 @@ function clearConsole() {
   console.log('UdyatSpoof v1 - github.com/ottersek/UdyatSpoof\n'.cyan);
 }
 
+function getRandomAgent(agents) {
+  const randomIndex = Math.floor(Math.random() * agents.length);
+  return agents[randomIndex];
+}
+
+function selectAgentOption(callback) {
+  rl.question('Spoofed Agent (Default / From File / Custom): '.yellow, (option) => {
+    if (option.toLowerCase() === 'default') {
+      callback('default');
+    } else if (option.toLowerCase() === 'from file') {
+      callback('from file');
+    } else if (option.toLowerCase() === 'custom') {
+      callback('custom');
+    } else {
+      console.log('Invalid option. Please try again.\n'.red);
+      selectAgentOption(callback);
+    }
+  });
+}
+
 function sendRequests() {
   clearConsole();
 
   rl.question('Website: '.yellow, (website) => {
     rl.question('Spoofed IP: '.yellow, (spoofedIP) => {
-      rl.question('Spoofed Agent: '.yellow, (spoofedAgent) => {
-        rl.question('NoR (Number of Requests): '.yellow, (noOfRequests) => {
-          const requests = parseInt(noOfRequests);
-          
-          for (let i = 0; i < requests; i++) {
-            makeRequest(website, spoofedIP, spoofedAgent, i);
-          }
-          
-          rl.close();
-        });
+      selectAgentOption((option) => {
+        if (option === 'default') {
+          fs.readFile('agents.udyat', 'utf8', (error, data) => {
+            if (error) {
+              console.error(`Error reading agents file: ${error}`);
+              rl.close();
+              return;
+            }
+
+            const agents = data.split('\n').filter(agent => agent.trim() !== '');
+            const spoofedAgent = getRandomAgent(agents);
+            rl.question('NoR: '.yellow, (noOfRequests) => {
+              const requests = parseInt(noOfRequests);
+              for (let i = 0; i < requests; i++) {
+                makeRequest(website, spoofedIP, spoofedAgent, i);
+              }
+              rl.close();
+            });
+          });
+        } else if (option === 'from file') {
+          rl.question('Agents file: '.yellow, (agentsFile) => {
+            fs.readFile(agentsFile, 'utf8', (error, data) => {
+              if (error) {
+                console.error(`Error reading agents file: ${error}`);
+                rl.close();
+                return;
+              }
+
+              const agents = data.split('\n').filter(agent => agent.trim() !== '');
+              const spoofedAgent = getRandomAgent(agents);
+              rl.question('NoR: '.yellow, (noOfRequests) => {
+                const requests = parseInt(noOfRequests);
+                for (let i = 0; i < requests; i++) {
+                  makeRequest(website, spoofedIP, spoofedAgent, i);
+                }
+                rl.close();
+              });
+            });
+          });
+        } else if (option === 'custom') {
+          rl.question('Custom Spoofed Agent: '.yellow, (spoofedAgent) => {
+            rl.question('NoR: '.yellow, (noOfRequests) => {
+              const requests = parseInt(noOfRequests);
+              for (let i = 0; i < requests; i++) {
+                makeRequest(website, spoofedIP, spoofedAgent, i);
+              }
+              rl.close();
+            });
+          });
+        }
       });
     });
   });
@@ -45,12 +106,12 @@ function makeRequest(website, spoofedIP, spoofedAgent, index) {
       'User-Agent': spoofedAgent
     }
   })
-  .then(() => {
-    console.log(`Request ${index+1} sent successfully.\n`.green.bold);
-  })
-  .catch((error) => {
-    console.log(`Request ${index+1} failed. Error: ${error.message}\n`.red.bold);
-  });
+    .then(() => {
+      console.log(`Request ${index + 1} sent successfully.\n`.green.bold);
+    })
+    .catch((error) => {
+      console.log(`Request ${index + 1} failed. Error: ${error.message}\n`.red.bold);
+    });
 }
 
 sendRequests();
